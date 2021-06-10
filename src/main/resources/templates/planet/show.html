@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title th:text="${planet.getName()}"></title>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div th:replace="~{fragments/navigation :: navigation}"></div>
+      <div class="container mt-5 bg-light">
+        <div class="row">
+          <div class="col-1"></div>
+          <div class="col-10">
+            <div class="card w-50">
+              <div class="card-body">
+                <h4 class="card-title" th:text="${'Имя:  ' + planet.getName()}"></h4>
+                <h5 class="card-text" th:text="'Повелитель:  ' + (${planet.getOverlord() != null} ? ${planet.getOverlord().getName()} : 'не назначено')"></h5>
+                <div class="row">
+                  <div class="col-6">
+                    <form th:action="@{/planet/{id}(id=${planet.getId()})}" th:method="delete">
+                      <button type="submit" class="btn btn-danger">Уничтожить планету</button>
+                    </form>
+                  </div>
+                  <div class="col-6">
+                    <a th:href="@{/planet/{id}/edit(id=${planet.getId()})}" class="btn btn-primary">Назначит Повелителя</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-1"></div>
+        </div>
+      </div>
+      <div th:replace="~{fragments/footer :: footer}"></div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+</body>
+</html>
